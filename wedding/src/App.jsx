@@ -1,22 +1,19 @@
-import { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap CSS
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Bootstrap JS
-import Dashboard from './dashboard/Dashboard';
-import Wedding from './pages/Wedding';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import CategoryPage from "./pages/CategoryPage";
+import Details from "./pages/Details";
 
-function App() {
-  
-  const [count, setCount] = useState(0);
-
+const App = () => {
   return (
-    <>
-
-      <Dashboard />
-      <Wedding/>
-
-    </>
+    <Routes>
+      {/* <Route path="/" element={<Home />} /> */}
+      <Route path="/category/:categoryName" element={<CategoryPage />} />
+      <Route path="/Details" element={<Details/>}/>
+    </Routes>
   );
-}
+};
 
 export default App;
