@@ -36,7 +36,7 @@ const Category = () => {
     } catch (err) {
       setError("Failed to fetch data. Please try again.");
     }
-    
+
     setLoading(false);
   };
 
@@ -67,18 +67,23 @@ const Category = () => {
         {loading && <p className="text-warning">Loading...</p>}
         {error && <p className="text-danger">{error}</p>}
         
-        {fetchedData.length > 0 && fetchedData.map((item, index) => (
-          <div key={index} className="col-md-4 mb-3">
-            <div className="card shadow-sm" onClick={() => handleCardClick(item)} style={{ cursor: "pointer" }}>
-              <img src={item.image} className="card-img-top" alt={item.title} />
-              <div className="card-body">
-                <h5 className="card-title">{item.title}</h5>
-                <p className="card-text">{item.description}</p>
-                <button className="btn btn-outline-primary">View Details</button>
+        {fetchedData.length > 0 &&
+          fetchedData.map((item, index) => (
+            <div key={index} className="col-md-4 mb-3">
+              <div
+                className="card shadow-sm"
+                onClick={() => handleCardClick(item)}
+                style={{ cursor: "pointer" }}
+              >
+                <img src={item.image} className="card-img-top" alt={item.title} />
+                <div className="card-body">
+                  <h5 className="card-title">{item.title}</h5>
+                  <p className="card-text">{item.description}</p>
+                  <button className="btn btn-outline-primary">View Details</button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );

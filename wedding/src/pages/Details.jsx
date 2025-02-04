@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const Details = () => {
   const [invitations, setInvitations] = useState([]);
+  const [error, setError] = useState(null); // State for handling errors
   const invitationRefs = useRef([]);
   const navigate = useNavigate();
 
@@ -16,7 +17,10 @@ const Details = () => {
         setInvitations(response.data);
         invitationRefs.current = response.data.map(() => React.createRef());
       })
-      .catch((error) => console.error("Error fetching data:", error));
+      .catch((error) => {
+        setError("Failed to load invitations. Please try again later.");
+        console.error("Error fetching data:", error);
+      });
   }, []);
 
   const handleTextChange = (index, field, value) => {
@@ -32,26 +36,32 @@ const Details = () => {
     html2canvas(element, { scale: 2 }).then((canvas) => {
       const link = document.createElement("a");
       link.href = canvas.toDataURL("image/png");
-      link.download = `wedding_invitation_${index + 1}.png`;
+      link.download = `wedding_invitation_${index + 1}.png`; // Corrected the file name
       link.click();
     });
   };
 
   return (
     <div className="container my-5">
-      <button className="btn btn-secondary mb-3" onClick={() => navigate(-1)}>⬅ Back</button>
+      <button className="btn btn-secondary mb-3" onClick={() => navigate(-1)}>
+        ⬅ Back
+      </button>
       <h1 className="py-5 text-center">Wedding Invitations</h1>
-      
+
+      {error && <p className="text-center text-danger">{error}</p>}
+
       {invitations.length === 0 ? (
         <p className="text-center">No invitations found.</p>
       ) : (
         invitations.map((invite, index) => (
           <div
-            key={index}
+            key={invite.id || index} // Using a unique ID if available
             ref={invitationRefs.current[index]}
             className="preview p-4 mb-4 rounded shadow"
             style={{
-              backgroundImage: invite.backgroundImage ? `url(${invite.backgroundImage})` : "none",
+              backgroundImage: invite.backgroundImage
+                ? `url(${invite.backgroundImage})`
+                : "none",
               backgroundSize: "cover",
               backgroundPosition: "center",
               minHeight: "80vh",
@@ -62,7 +72,9 @@ const Details = () => {
               onBlur={(e) => handleTextChange(index, "title", e.target.innerText)}
               style={{
                 color: invite.textStyles?.title?.color || "#000",
-                fontSize: invite.textStyles?.title?.fontSize ? `${invite.textStyles.title.fontSize}px` : "24px",
+                fontSize: invite.textStyles?.title?.fontSize
+                  ? `${invite.textStyles.title.fontSize}px`
+                  : "24px",
                 textAlign: invite.textStyles?.title?.alignment || "center",
               }}
             >
