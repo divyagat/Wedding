@@ -1,41 +1,35 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import "../App.css";
+import Category from "./CategoryPage";
 
-const categories = [
-  "Wedding",
-  "Birthday",
-  "Engagement",
-  "Baby Shower",
-  "House Warming",
-  "Anniversary Celebration",
-  "Marriage Biodata",
-  "Inauguration",
-];
 
-const Home = () => {
-  const navigate = useNavigate();
+function Home() {
 
-  const handleCategoryClick = (category) => {
-    navigate(`/category/${category}`);
-  };
+    return (
+        <>
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="src/Components/Componentsimg/image 1.png" class="d-block w-100" alt="..." />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="src/Components/Componentsimg/image 1.png" class="d-block w-100" alt="..." />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="src/Components/Componentsimg/image 1.png" class="d-block w-100" alt="..." />
+                    </div>
+                </div>
+            </div>
 
-  return (
-    <div className="container text-center my-5">
-      <h2 className="title">Wedding Cards</h2>
-      <div className="d-flex flex-wrap justify-content-center gap-3">
-        {categories.map((category, index) => (
-          <button
-            key={index}
-            className="custom-btn"
-            onClick={() => handleCategoryClick(category)}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-};
+            {/* Wedding Cards Section */}
+            <Category />
 
-export default Home;
+            {/* Products Section */}
+
+            {/* About Us Section */}
+
+            {/* Gallery Section */}
+
+
+        </>
+
+    )
+} export default Home;

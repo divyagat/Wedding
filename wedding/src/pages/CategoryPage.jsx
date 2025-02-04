@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../pages/CategoryPage.css"
 
 const categories = [
   "Wedding",
   "Birthday",
   "Engagement",
   "Baby Shower",
+  "Inugration",
   "House Warming",
   "Anniversary Celebration",
   "Marriage Biodata",
-  "Inauguration",
 ];
 
 const Category = () => {
@@ -46,15 +47,15 @@ const Category = () => {
   };
 
   return (
-    <div className="container text-center my-5">
-      <h2 className="mb-4">Choose a Category</h2>
+    <div className="container text-center ">
+      <h2 className="mb-4 py-5">Wedding Cards</h2>
       
       {/* Category Buttons */}
-      <div className="d-flex flex-wrap justify-content-center gap-3">
+      <div className="d-flex flex-wrap justify-content-center gap-5">
         {categories.map((category, index) => (
           <button
             key={index}
-            className={`btn ${selectedCategory === category ? "btn-success" : "btn-primary"}`}
+            className={`btn ${selectedCategory === category ? "btn-success" : ""}`} style={{boxShadow:"2px 1px 14px gray", padding:"14px 50px" , borderRadius: "17px", fontWeight:"bold" ,color:"brown", fontSize:"18px", backgroundColor:"#FFF4F4" }}
             onClick={() => handleCategoryClick(category)}
           >
             {category}
